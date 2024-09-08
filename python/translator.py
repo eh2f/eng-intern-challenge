@@ -61,10 +61,11 @@ def braille_to_english(braille_string):
     cap_flag = False
     num_flag = False
     for index_braille in range(0, len(braille_string), 6):
+        # get block of braille and the corresponding key to the dictionary
         current_block = braille_string[index_braille:index_braille+6]
-        # print(current_block)
         key_letter = [key for key, value in alphabet.items() if value == current_block]
-        # key_letter = list(alphabet.keys())[list(alphabet.values()).index(current_block)]
+
+        # check for keywords
         if 'space' == key_letter[0]:
             ret_str += ' '
             num_flag = False
@@ -104,12 +105,9 @@ def english_to_braille(english_string):
 
 
 for i in sys.argv[1:]:
-    i = '.....OO.....O.O...OO...........O.OOOO.....O.O...OO..........OO..OO.....OOO.OOOO..OOO'
     full = ''
     placeholder = "".join(set(i))
     if ('.' in placeholder and len(placeholder) == 1) or ('.' in placeholder and 'O' in placeholder):
-        print(braille_to_english(i))
         full += braille_to_english(i)
     else:
         full += english_to_braille(i)
-
